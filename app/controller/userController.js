@@ -18,17 +18,21 @@ exports.read = function (req, res) {
 exports.login = function (req ,res) {
     model.find({
   	where: {
-        email: req.body.email,
-   	    password: req.body.password
-    }
+        	email: req.body.email,
+   	        password: req.body.password
+    	}
     })
-   	.then(user => {
+   .then(user => {
         console.log('user ' + user);
         if (user){
-            res.json(user);
+            var concat = user.email + ":" + user.password
+            let buff = new Buffer(concat);
+            let base64data = buff.toString('base64');
+
+            res.json({ accessToken: base64data });
         } else {
             res.status(403).render();
         }
-	})
-    .error(err => res.json(err));
+   })
+   .error(err => res.json(err));
 }

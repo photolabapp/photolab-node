@@ -17,6 +17,7 @@
     "express": "^4.16.3",
     "mysql2": "^1.6.1",
     "npm": "^6.4.1",
+    "react-native-form-validator": "^0.2.0",
     "sequelize": "^4.39.0"
   }
 }

@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
         name: { type: Sequelize.STRING },
         email: { type: Sequelize.STRING },
         password: { type: Sequelize.STRING },
+        cellPhone: { type: Sequelize.STRING, field: 'cell_phone' },
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: 'dt_create' }
     },
     {       
