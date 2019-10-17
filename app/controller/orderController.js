@@ -46,4 +46,8 @@ exports.getLastOrderCreated = function (req, res) {
     }).error(err => res.json(err));
 }
 
-
+exports.findAll = function (req, res) {
+    model.findAll()
+        .then(user => res.json(user))
+        .error(err => res.json(err));
+}

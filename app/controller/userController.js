@@ -50,3 +50,13 @@ exports.login = function (req, res) {
         }
     }).error(err => res.json(err));
 }
+
+exports.findById = function (req, res) {
+    model.find({
+        where: {
+            id: req.body.user
+        }
+    }).then(user => {
+        res.json({ user: user });
+    }).error(err => res.json(err));
+}
