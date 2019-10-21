@@ -1,4 +1,4 @@
-const model = require("../model").user;
+const model = require("../model").collaborator;
 var exports = module.exports = {};
 
 exports.create = function (req, res) {
@@ -13,11 +13,11 @@ exports.create = function (req, res) {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
-            }).then(user => {
-                var concat = user.email + ":" + user.password
+            }).then(collaborator => {
+                var concat = collaborator.email + ":" + collaborator.password
                 let buff = Buffer.alloc(concat.length, concat);
                 let base64data = buff.toString('base64');
-                res.json({ user: user, accessToken: base64data })
+                res.json({ collaborator: collaborator, accessToken: base64data })
             })
         } else {
             res.status(412).send({ message: "E-mail " + req.body.email + " já existe!!!" });
@@ -27,7 +27,7 @@ exports.create = function (req, res) {
 
 exports.read = function (req, res) {
     model.findAll()
-        .then(user => res.json(user))
+        .then(collaborator => res.json(collaborator))
         .error(err => res.json(err));
 };
 
@@ -37,20 +37,21 @@ exports.login = function (req, res) {
             email: req.body.email,
             password: req.body.password
         }
-    }).then(user => {
-        console.log('user ' + user);
+    }).then(collaborator => {
+        console.log('collaborator ' + collaborator);
         if (user) {
-            var concat = user.email + ":" + user.password
+            var concat = collaborator.email + ":" + user.password
             let buff = new Buffer(concat);
             let base64data = buff.toString('base64');
 
-            res.json({ user: user, accessToken: base64data });
+            res.json({ collaborator: collaborator, accessToken: base64data });
         } else {
             res.status(403).send({ message: "Usuário ou senha inválidos" });
         }
     }).error(err => res.json(err));
 }
 
+/*
 exports.findById = function (req, res) {
     console.log("DLKFDLFKDLF ==== userId " + req.params.id)
     model.find({
@@ -61,3 +62,4 @@ exports.findById = function (req, res) {
         res.json({ user: user });
     }).error(err => res.json(err));
 }
+*/

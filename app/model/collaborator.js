@@ -1,10 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define('orderPhoto', {
+    return sequelize.define('collaborator', {
         id: { autoIncrement: true, primaryKey: true, type: Sequelize.INTEGER },
-        orderId: { type: Sequelize.INTEGER, field: "order_id" },
-        userId: { type: Sequelize.INTEGER, field: "user_id" },
-        photo: { type: Sequelize.TEXT },
-        type: { type: Sequelize.TEXT },
+        name: { type: Sequelize.STRING },
+        email: { type: Sequelize.STRING },
+        password: { type: Sequelize.STRING },
+        cellPhone: { type: Sequelize.STRING, field: "cell_phone" },
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
         dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" }
     },

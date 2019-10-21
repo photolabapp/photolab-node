@@ -16,7 +16,7 @@ exports.updateToSaved = function (req, res) {
             user_id: req.body.user
         }
     }).then(order => {
-        order.update({ status: "SAVED" }).then(order => res.json(order));
+        order.update({ status: "SAVED", dtUpdate: new Date() }).then(order => res.json(order));
     }).error(err => res.json(err))
 }
 

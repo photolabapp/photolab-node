@@ -4,8 +4,9 @@ module.exports = (sequelize, Sequelize) => {
         name: { type: Sequelize.STRING },
         email: { type: Sequelize.STRING },
         password: { type: Sequelize.STRING },
-        cellPhone: { type: Sequelize.STRING },
-        dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
+        cellPhone: { type: Sequelize.STRING, field: "cell_phone" },
+        dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
+        dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" }
     },
     {       
         freezeTableName: true,
