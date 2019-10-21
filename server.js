@@ -1,7 +1,11 @@
 const express = require('express'),
 	bodyParser = require('body-parser'),	
 	chalk = require('chalk'),
-	app = express();
+	app = express(),
+	cors = require('cors')
+
+//Cors
+app.use(cors())
 
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,7 +17,7 @@ app.use(bodyParser.json());
 const models = require("./app/model");
 
 // Routes
-const routes = require("./app/route/routes.js")(app);
+const routes = require("./app/route/routes.js")(app, cors);
 
 // Test the connection
 models.sequelize.authenticate()

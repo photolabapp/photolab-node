@@ -54,7 +54,7 @@ exports.login = function (req, res) {
 exports.findById = function (req, res) {
     model.find({
         where: {
-            id: req.body.user
+            id: req.body.userId
         }
     }).then(user => {
         res.json({ user: user });

@@ -3,14 +3,13 @@ var shippingController = require('../controller/shippingController.js');
 var orderController = require('../controller/orderController.js');
 var orderPhotoController = require('../controller/orderPhotoController.js');
 var multer  = require('multer')
-var cors = require('cors');
+//var cors = require('cors');
 
 //var upload = multer({ storage: multer.memoryStorage({}) })
 var upload = multer({ dest: 'uploads/' })
 
 module.exports = function (app) {
-    
-    app.use(cors({origin: 'http://localhost:8080'}));
+    //app.use(cors({origin: 'http://localhost:8080'}));
     app.post('/user', userController.create);
     app.get('/user', userController.read);
     app.get('/user/id', userController.findById);
