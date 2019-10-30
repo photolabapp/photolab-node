@@ -4,7 +4,7 @@ var exports = module.exports = {};
 
 exports.create = function (req, res) {
     model.create({
-        user_id: req.body.user,
+        userId: req.body.user,
         status: "CREATED"
     }).then(order => res.json(order));
 }
@@ -13,7 +13,7 @@ exports.updateToSaved = function (req, res) {
     model.find({
         where: {
             id: req.body.order,
-            user_id: req.body.user
+            userId: req.body.user
         }
     }).then(order => {
         order.update({ status: "SAVED", dtUpdate: new Date() }).then(order => res.json(order));
@@ -22,8 +22,8 @@ exports.updateToSaved = function (req, res) {
 
 exports.uploadPhoto = function (req, res) {
     photoOrder.create({
-        user_id: req.body.user,
-        oder_id: req.body.order,
+        userId: req.body.user,
+        oderId: req.body.order,
         photo: req.body.photo
     }).then(order => res.json(order));
 }
@@ -31,7 +31,7 @@ exports.uploadPhoto = function (req, res) {
 exports.getLastOrderCreated = function (req, res) {
     model.find({
         where: {
-            user_id: req.body.user,
+            userId: req.body.user,
             status: "CREATED"
         },
         order: [["id", "DESC"]],
