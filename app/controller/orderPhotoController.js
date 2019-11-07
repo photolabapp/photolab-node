@@ -11,4 +11,18 @@ exports.uploadPhoto = function (req, res) {
     }).then(order => res.json(order));
 }
 
+exports.getByOrderId = function (req, res) {
+    model.find({
+        where: {
+            orderId: req.params.order,
+        }
+    }).then(orderPhoto => {
+        console.log('order ' + orderPhoto);
+        if (orderPhoto) {
+            res.json(orderPhoto);
+        } else {
+            res.status(412).send("Haven't orderPhoto with order " + req.params.id);
+        }
+    }).error(err => res.json(err));
+}
 

@@ -19,4 +19,5 @@ module.exports = function (app) {
     app.get('/order/last/created', orderController.getLastOrderCreated)
     app.post('/collaborator', collaboratorController.create);
     app.post('/collaborator/login', collaboratorController.login);
+    app.get('/order/photo/order/:id', orderPhotoController.getByOrderId);
 }
