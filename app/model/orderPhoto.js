@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
         orderId: { type: Sequelize.INTEGER, field: "order_id" },
         userId: { type: Sequelize.INTEGER, field: "user_id" },
         quantity: { type: Sequelize.INTEGER },
-        formart: { type: Sequelize.TEXT, defaultValue = "10x15" },
+        formart: { type: Sequelize.TEXT },
         photo: { type: Sequelize.TEXT },
         type: { type: Sequelize.TEXT },
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },

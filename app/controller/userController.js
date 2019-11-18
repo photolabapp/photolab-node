@@ -49,6 +49,7 @@ exports.login = function (req, res) {
             res.status(403).send({ message: "Usuário ou senha inválidos" });
         }
     }).error(err => res.json(err));
+    
 }
 
 exports.findById = function (req, res) {
