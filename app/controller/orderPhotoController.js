@@ -14,7 +14,7 @@ exports.uploadPhoto = function (req, res) {
 }
 
 exports.getByOrderId = function (req, res) {
-    model.find({
+    model.findAll({
         where: {
             orderId: req.params.id,
         }
