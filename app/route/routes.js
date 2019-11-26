@@ -13,6 +13,7 @@ module.exports = function (app) {
     app.post('/login', userController.login);
     app.get('/shipping', shippingController.getByCep)
     app.post('/order', orderController.create);
+    app.get('/order/:id', orderController.getById);
     app.get('/order/all', orderController.findAll);
     app.put('/order/saved', orderController.updateToSaved);
     app.post('/order/photo', upload.single('photo'), orderPhotoController.uploadPhoto);

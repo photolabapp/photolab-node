@@ -51,3 +51,13 @@ exports.findAll = function (req, res) {
         .then(user => res.json(user))
         .error(err => res.json(err));
 }
+
+exports.getById = function (req, res) {
+    model.find({
+        where: {
+            id: req.params.id
+        }
+    }).then(order => {
+        res.json({ order: order });
+    }).error(err => res.json(err));
+}
