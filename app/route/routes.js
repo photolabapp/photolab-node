@@ -21,4 +21,6 @@ module.exports = function (app) {
     app.post('/collaborator', collaboratorController.create);
     app.post('/collaborator/login', collaboratorController.login);
     app.get('/order/photo/order/:id', orderPhotoController.getByOrderId);
+    app.get('/order/photo/image/:id', orderPhotoController.getImage);
+    app.get('/order/photo', orderPhotoController.findAll);
 }
