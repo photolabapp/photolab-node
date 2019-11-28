@@ -13,6 +13,7 @@ exports.create = function (req, res) {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
+                cellPhone: req.body.cellPhone
             }).then(user => {
                 var concat = user.email + ":" + user.password
                 let buff = Buffer.alloc(concat.length, concat);
@@ -49,6 +50,7 @@ exports.login = function (req, res) {
             res.status(403).send({ message: "Usuário ou senha inválidos" });
         }
     }).error(err => res.json(err));
+    
 }
 
 exports.findById = function (req, res) {

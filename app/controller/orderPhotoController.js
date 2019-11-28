@@ -6,6 +6,8 @@ exports.uploadPhoto = function (req, res) {
     model.create({
         userId: req.body.user,
         orderId: req.body.order,
+        format: req.body.format,
+        quantity: req.body.quantity,
         photo: req.file.filename,
         type: req.file.mimetype
     }).then(order => res.json(order));
@@ -18,9 +20,9 @@ exports.findAll = function (req, res) {
 }
 
 exports.getByOrderId = function (req, res) {
-    model.find({
+    model.findAll({
         where: {
-            orderId: req.params.order,
+            orderId: req.params.id,
         }
     }).then(orderPhoto => {
         console.log('order ' + orderPhoto);
