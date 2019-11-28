@@ -42,7 +42,7 @@ exports.getImage = (req, res) => {
     }).then(orderPhoto => {
         console.log('order ' + orderPhoto);
         if (orderPhoto) {
-            res.sendFile(orderPhoto.photo);
+            res.sendFile("./photo/" + orderPhoto.photo);
         } else {
             res.status(404).send('Image not found');
         }
