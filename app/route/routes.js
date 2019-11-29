@@ -16,11 +16,11 @@ module.exports = function (app) {
     app.get('/order/:id', orderController.getById);
     app.get('/order', orderController.findAll);
     app.put('/order/saved', orderController.updateToSaved);
-    app.post('/order/photo', upload.single('photo'), orderPhotoController.uploadPhoto);
-    app.get('/order/last/created', orderController.getLastOrderCreated)
+    app.get('/last/order/created', orderController.getLastOrderCreated)
     app.post('/collaborator', collaboratorController.create);
     app.post('/collaborator/login', collaboratorController.login);
-    app.get('/order/photo/order/:id', orderPhotoController.getByOrderId);
-    app.get('/order/photo/image/:id', orderPhotoController.getImage);
-    app.get('/order/photo', orderPhotoController.findAll);
+    app.get('/photo/order/:id', orderPhotoController.getByOrderId);
+    app.get('/photo/image/:id', orderPhotoController.getImage);
+    app.get('/photo', orderPhotoController.findAll);
+    app.post('/photo', upload.single('photo'), orderPhotoController.uploadPhoto);
 }
