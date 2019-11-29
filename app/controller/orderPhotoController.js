@@ -41,7 +41,7 @@ exports.getImage = (req, res) => {
     }).then(orderPhoto => {
         console.log('order ' + orderPhoto);
         if (orderPhoto) {
-            res.sendFile("~/Project/photolab-node/photos/" + orderPhoto.photo);
+            res.sendFile(orderPhoto.photo, { root: '../photos' })
         } else {
             res.status(404).send('Image not found');
         }

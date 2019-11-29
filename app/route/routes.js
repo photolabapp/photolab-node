@@ -15,7 +15,7 @@ module.exports = function (app) {
     app.post('/order', orderController.create);
     app.get('/order/:id', orderController.getById);
     app.get('/order', orderController.findAll);
-    app.put('/order/saved', orderController.updateToSaved);
+    app.put('/order', orderController.updateToSaved);
     app.get('/last/order/created', orderController.getLastOrderCreated)
     app.post('/collaborator', collaboratorController.create);
     app.post('/collaborator/login', collaboratorController.login);
