@@ -1,5 +1,6 @@
 const model = require("../model").orderPhoto;
 var exports = module.exports = {};
+var AdmZip = require('adm-zip');
 
 exports.uploadPhoto = function (req, res) {
     model.create({
@@ -44,6 +45,29 @@ exports.getImage = (req, res) => {
             res.sendFile(orderPhoto.photo, { root: 'uploads' })
         } else {
             res.status(404).send('Image not found');
+        }
+    }).error(err => res.json(err));
+}
+
+exports.getImages = (req, res) => {
+    model.find({
+        where: {
+            orderId: req.params.orderId,
+        }
+    }).then(orderPhotos => {
+        if (orderPhotos) {
+            var zip = new AdmZip();
+            for (key in orderPhotos) {
+                let orderPhoto = orderPhotos[key]
+                zip.addLocalFile(orderPhoto.photo);
+            }
+            res.sendFile(orderPhoto.photo, { root: 'uploads' })
+            var willSendthis = zip.toBuffer();
+            res.download(orderPhoto.photo, { root: 'uploads' })
+
+            console.log('order ' + orderPhoto);
+        } else {
+            res.status(404).send('Imsage not found');
         }
     }).error(err => res.json(err));
 }
