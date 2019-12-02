@@ -41,7 +41,7 @@ exports.getImage = (req, res) => {
     }).then(orderPhoto => {
         console.log('order ' + orderPhoto);
         if (orderPhoto) {
-            res.sendFile(orderPhoto.photo, { root: 'photos' })
+            res.sendFile(orderPhoto.photo, { root: 'uploads' })
         } else {
             res.status(404).send('Image not found');
         }
