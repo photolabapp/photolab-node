@@ -52,7 +52,7 @@ exports.getImage = (req, res) => {
 exports.getImages = (req, res) => {
     model.find({
         where: {
-            orderId: req.params.orderId,
+            orderId: req.params.id,
         }
     }).then(orderPhotos => {
         if (orderPhotos) {

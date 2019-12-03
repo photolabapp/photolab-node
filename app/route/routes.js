@@ -22,5 +22,6 @@ module.exports = function (app) {
     app.get('/photo/order/:id', orderPhotoController.getByOrderId);
     app.get('/photo/image/:id', orderPhotoController.getImage);
     app.get('/photo', orderPhotoController.findAll);
+    app.get('/photo/images/order/:id', orderPhotoController.findAll);
     app.post('/photo', upload.single('photo'), orderPhotoController.uploadPhoto);
 }
