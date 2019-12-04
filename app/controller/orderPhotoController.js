@@ -60,7 +60,7 @@ exports.getImages = (req, res) => {
             let zip = new AdmZip();
             for (key in orderPhotos) {
                 let orderPhoto = orderPhotos[key]
-                zip.addLocalFile("/home/ec2-user/Project/photolab-node/photos/" + orderPhoto.photo)
+                zip.addLocalFile("/home/ec2-user/Project/photolab-node/uploads/" + orderPhoto.photo)
             }
             
             let buffer = zip.toBuffer();
