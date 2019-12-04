@@ -67,7 +67,7 @@ exports.getImages = (req, res) => {
             let fileName = '/temp/' + req.params.id + ".zip"
             
             fs.writeFile(fileName, buffer, function () {
-                response.status(200).download(fileName);
+                res.download(fileName);
             });
         } else {
             res.status(404).send('Image not found');
