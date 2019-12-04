@@ -64,7 +64,7 @@ exports.getImages = (req, res) => {
             }
             
             let buffer = zip.toBuffer();
-            let fileName = '/temp/' + req.params.id + ".zip"
+            let fileName = '/home/ec2-user/Project/photolab-node/uploads/' + req.params.id + ".zip"
             
             fs.writeFile(fileName, buffer, function () {
                 res.download(fileName);
