@@ -51,7 +51,7 @@ exports.getImage = (req, res) => {
 }
 
 exports.getImages = (req, res) => {
-    model.find({
+    model.findAll({
         where: {
             orderId: req.params.id,
         }
@@ -60,7 +60,7 @@ exports.getImages = (req, res) => {
             let zip = new AdmZip();
             for (key in orderPhotos) {
                 let orderPhoto = orderPhotos[key]
-                zip.addLocalFile(orderPhoto.photo);
+                zip.addLocalFile("/home/ec2-user/Project/photolab-node/photos" + orderPhoto.photo)
             }
             
             let buffer = zip.toBuffer();
