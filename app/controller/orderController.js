@@ -1,4 +1,7 @@
 const model = require("../model").order;
+const orderPhoto = require("../model").orderPhoto;
+const user = require("../model").user;
+
 const photoOrder = require("../model").photoOrder;
 var exports = module.exports = {};
 
@@ -48,7 +51,9 @@ exports.getLastOrderCreated = function (req, res) {
 
 exports.findAll = function (req, res) {
     model.findAll()
-        .then(user => res.json(user))
+        .then(order => {
+            res.json(order)
+        })
         .error(err => res.json(err));
 }
 
