@@ -51,7 +51,7 @@ exports.getImage = (req, res) => {
 }
 
 exports.getImages = (req, res) => {
-    model.find({
+    model.findAll({
         where: {
             orderId: req.params.id,
         }
@@ -60,14 +60,14 @@ exports.getImages = (req, res) => {
             let zip = new AdmZip();
             for (key in orderPhotos) {
                 let orderPhoto = orderPhotos[key]
-                zip.addLocalFile(orderPhoto.photo);
+                zip.addLocalFile("/home/ec2-user/Project/photolab-node/uploads/" + orderPhoto.photo)
             }
             
             let buffer = zip.toBuffer();
-            let fileName = '/temp/' + req.params.id + ".zip"
+            let fileName = '/home/ec2-user/Project/photolab-node/uploads/' + req.params.id + ".zip"
             
             fs.writeFile(fileName, buffer, function () {
-                response.status(200).download(fileName);
+                res.download(fileName);
             });
         } else {
             res.status(404).send('Image not found');
