@@ -68,6 +68,14 @@ exports.getById = function (req, res) {
             id: req.params.id
         }
     }).then(order => {
-        res.json({ order: order });
+        orderPhoto.findAll({ where: { orderId: order.id } })
+            .then(orderPhotos => {
+                order.album = orderPhotos
+                user.find({ where: { id: order.userId } })
+                    .then(user => {
+                        order.user = user
+                        res.json({ order: order })
+                    })
+            })
     }).error(err => res.json(err));
 }
