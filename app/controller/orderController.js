@@ -51,10 +51,15 @@ exports.getLastOrderCreated = function (req, res) {
 
 exports.findAll = function (req, res) {
     model.findAll()
-        .then(order => {
-            res.json(order)
-        })
-        .error(err => res.json(err));
+        .then(orders => {
+            for (key in orders) {
+                var order = orders[key]
+                orderPhoto.findAll({ where: { orderId: order.id } }).then(orderPhotos => order.album = orderPhotos)
+                user.find({ where: { id: order.userId } }).then(user => order.user = user)
+            }
+
+            return orders
+        }).then(orders => res.json(orders)).error(err => res.json(err));
 }
 
 exports.getById = function (req, res) {
