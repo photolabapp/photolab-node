@@ -32,7 +32,7 @@ exports.uploadPhoto = function (req, res) {
 }
 
 exports.getLastOrderCreated = function (req, res) {
-    model.find({
+    model.findOne({
         where: {
             userId: req.body.user,
             status: "CREATED"
@@ -40,7 +40,6 @@ exports.getLastOrderCreated = function (req, res) {
         order: [["id", "DESC"]],
         limit: 1
     }).then(order => {
-        console.log('order ' + order);
         if (order) {
             res.json(order);
         } else {
@@ -50,16 +49,16 @@ exports.getLastOrderCreated = function (req, res) {
 }
 
 exports.findAll = function (req, res) {
-    model.findAll()
-        .then(orders => {
-            for (key in orders) {
-                var order = orders[key]
-                orderPhoto.findAll({ where: { orderId: order.id } }).then(orderPhotos => order.album = orderPhotos)
-                user.find({ where: { id: order.userId } }).then(user => order.user = user)
-            }
+    model.findAll().then(async orders => {
+        for (key in orders) {
+            var getOrderPhotos = await orderPhoto.findAll({ where: { orderId: orders[key].id } })
+            orders[key].album = getOrderPhotos
+            var getUser = await user.findOne({ where: { id: orders[key].userId } })
+            orders[key].user = getUser
+        }
 
-            return orders
-        }).then(orders => res.json(orders)).error(err => res.json(err));
+        return orders
+    }).then(orders => res.json(orders)).error(err => res.json(err));
 }
 
 exports.getById = function (req, res) {
@@ -67,15 +66,12 @@ exports.getById = function (req, res) {
         where: {
             id: req.params.id
         }
-    }).then(order => {
-        orderPhoto.findAll({ where: { orderId: order.id } })
-            .then(orderPhotos => {
-                order.album = orderPhotos
-                user.find({ where: { id: order.userId } })
-                    .then(user => {
-                        order.user = user
-                        res.json({ order: order })
-                    })
-            })
+    }).then(async order => {
+        var getOrderPhotos = await orderPhoto.findAll({ where: { orderId: order.id } })
+        order.album = getOrderPhotos
+        var getUser = await user.findOne({ where: { id: order.userId } })
+        order.user = getUser
+        
+        res.json({ order: order })
     }).error(err => res.json(err));
 }
