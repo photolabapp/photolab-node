@@ -55,10 +55,19 @@ exports.findAll = function (req, res) {
             orders[key].album = getOrderPhotos
             var getUser = await user.findOne({ where: { id: orders[key].userId } })
             orders[key].user = getUser
+            orders[key].qtdPhotos = this.getQtdPhotos(orders[key])
         }
 
         return orders
     }).then(orders => res.json(orders)).error(err => res.json(err));
+}
+
+getQtdPhotos = order => {
+    var qtd = 0
+    for (let key in order.album) {
+        qtd = qtd + (1 * order.album[key].quantity)
+    }
+    return qtd;
 }
 
 exports.getById = function (req, res) {

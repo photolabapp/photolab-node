@@ -6,7 +6,8 @@ module.exports = (sequelize, Sequelize) => {
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
         dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" },
         user: Sequelize.VIRTUAL,
-        album: Sequelize.VIRTUAL
+        album: Sequelize.VIRTUAL,
+        qtdPhotos: Sequelize.VIRTUAL
     },
     {       
         freezeTableName: true,
