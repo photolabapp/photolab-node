@@ -81,6 +81,6 @@ exports.getById = function (req, res) {
         var getUser = await user.findOne({ where: { id: order.userId } })
         order.user = getUser
         
-        res.json({ order: order })
+        res.json(order)
     }).error(err => res.json(err));
 }
