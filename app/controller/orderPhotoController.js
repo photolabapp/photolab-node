@@ -4,14 +4,19 @@ var AdmZip = require("adm-zip");
 var fs = require("fs");
 
 exports.uploadPhoto = function (req, res) {
-    model.create({
-        userId: req.body.user,
-        orderId: req.body.order,
-        format: req.body.format,
-        quantity: req.body.quantity,
-        photo: req.file.filename,
-        type: req.file.mimetype
-    }).then(order => res.json(order));
+    var extension = req.file.mimetype.split("/")[1]
+    var path = "~/Project/photolab-node/uploads/"
+    var newFile = req.file.filename + "." + extension
+    fs.rename(path + req.file.filename, path + newFile, () => {
+        model.create({
+            userId: req.body.user,
+            orderId: req.body.order,
+            format: req.body.format,
+            quantity: req.body.quantity,
+            photo: newFile,
+            type: req.file.mimetype
+        }).then(order => res.json(order));
+    })
 }
 
 exports.findAll = function (req, res) {
@@ -60,11 +65,11 @@ exports.getImages = (req, res) => {
             let zip = new AdmZip();
             for (key in orderPhotos) {
                 let orderPhoto = orderPhotos[key]
-                zip.addLocalFile("/home/ec2-user/Project/photolab-node/uploads/" + orderPhoto.photo)
+                zip.addLocalFile("~/Project/photolab-node/uploads/" + orderPhoto.photo)
             }
             
             let buffer = zip.toBuffer();
-            let fileName = '/home/ec2-user/Project/photolab-node/uploads/' + req.params.id + ".zip"
+            let fileName = '~/Project/photolab-node/uploads/' + req.params.id + ".zip"
             
             fs.writeFile(fileName, buffer, function () {
                 res.download(fileName);
