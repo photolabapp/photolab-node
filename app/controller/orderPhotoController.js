@@ -7,7 +7,8 @@ exports.uploadPhoto = function (req, res) {
     var extension = req.file.mimetype.split("/")[1]
     var path = "~/Project/photolab-node/uploads/"
     var newFile = req.file.filename + "." + extension
-    fs.rename(path + req.file.filename, path + newFile, () => {
+    fs.rename(path + req.file.filename, path + newFile, (err) => {
+        if (err) throw err;
         model.create({
             userId: req.body.user,
             orderId: req.body.order,
