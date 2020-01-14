@@ -5,7 +5,7 @@ var fs = require("fs");
 
 exports.uploadPhoto = function (req, res) {
     var extension = req.file.mimetype.split("/")[1]
-    var path = "home/ec2-user/Project/photolab-node/uploads/"
+    var path = "/home/ec2-user/Project/photolab-node/uploads/"
     var newFile = req.file.filename + "." + extension
     fs.renameSync(path + req.file.filename, path + newFile);
     model.create({
@@ -64,11 +64,11 @@ exports.getImages = (req, res) => {
             let zip = new AdmZip();
             for (key in orderPhotos) {
                 let orderPhoto = orderPhotos[key]
-                zip.addLocalFile("home/ec2-user/Project/photolab-node/uploads/" + orderPhoto.photo)
+                zip.addLocalFile("/home/ec2-user/Project/photolab-node/uploads/" + orderPhoto.photo)
             }
             
             let buffer = zip.toBuffer();
-            let fileName = 'home/ec2-user/Project/photolab-node/uploads/' + req.params.id + ".zip"
+            let fileName = '/home/ec2-user/Project/photolab-node/uploads/' + req.params.id + ".zip"
             
             fs.writeFile(fileName, buffer, function () {
                 res.download(fileName);
