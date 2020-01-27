@@ -23,6 +23,8 @@ exports.create = function (req, res) {
         address: req.body.address,
         number: req.body.number,
         complement: req.body.complement,
+        city: req.body.city,
+        state: req.body.city,
         cep: req.body.cep,
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
         dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" },
