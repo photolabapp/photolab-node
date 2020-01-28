@@ -9,6 +9,8 @@ module.exports = (sequelize, Sequelize) => {
         city: { type: Sequelize.STRING },
         state: { type: Sequelize.STRING },
         cep: { type: Sequelize.STRING },
+        selected: Sequelize.VIRTUAL,
+        price: Sequelize.VIRTUAL,
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
         dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" },
     },

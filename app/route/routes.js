@@ -1,6 +1,7 @@
 var userController = require('../controller/userController.js');
 var collaboratorController = require('../controller/collaboratorController.js');
 var shippingController = require('../controller/shippingController.js');
+var addressController = require('../controller/addressController.js');
 var orderController = require('../controller/orderController.js');
 var orderPhotoController = require('../controller/orderPhotoController.js');
 var multer  = require('multer')
@@ -12,6 +13,7 @@ module.exports = function (app) {
     app.get('/user/:id', userController.findById);
     app.post('/login', userController.login);
     app.get('/shipping', shippingController.getByCep)
+    app.get('/shipping/address/user/:id', addressController.getShippingAddress)
     app.post('/order', orderController.create);
     app.get('/order/:id', orderController.getById);
     app.get('/order', orderController.findAll);

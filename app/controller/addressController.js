@@ -1,16 +1,16 @@
 const model = require("../model").address;
 var exports = module.exports = {};
 
-exports.getAddress = async (req, res) => {
+exports.getShippingAddress = async (req, res) => {
     try {
-        const userAddress = model.findAll({ where: { userId: req.params.userId } })
-        const defaultAddress = model.findAll({ where: { id: 1 } })
+        const userAddress = await model.findAll({ where: { userId: req.params.id } })
+        const defaultAddress = await model.findAll({ where: { id: 1 } })
 
         const address = []
         address.push(defaultAddress)
         address.push(userAddress)
 
-        res.json(address);
+        res.json(defaultAddress);
     } catch (error) {
         res.json(err)
     }
