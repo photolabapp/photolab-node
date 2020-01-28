@@ -26,6 +26,8 @@ exports.create = function (req, res) {
         city: req.body.city,
         state: req.body.city,
         cep: req.body.cep,
+        selected: req.body.selected,
+        price: 23.32,
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
         dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" },
     }).then(order => res.json(order));
