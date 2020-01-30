@@ -1,16 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define('order', {
+    return sequelize.define('creditTransaction', {
         id: { autoIncrement: true, primaryKey: true, type: Sequelize.INTEGER },
         userId: { type: Sequelize.INTEGER, field: "user_id" },
-        //PHOTO, CREDIT
+        orderId: { type: Sequelize.INTEGER, field: "order_id" },
+        // CREDIT, DEBIT
         type: { type: Sequelize.STRING },
-        status: { type: Sequelize.STRING },
-        value: { type: Sequelize.DECIMAL },
+        quantity: { type: Sequelize.INTEGER },
         dtCreate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_create" },
         dtUpdate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW, field: "dt_update" },
-        user: Sequelize.VIRTUAL,
-        album: Sequelize.VIRTUAL,
-        qtdPhotos: Sequelize.VIRTUAL
     },
         {
             freezeTableName: true,
