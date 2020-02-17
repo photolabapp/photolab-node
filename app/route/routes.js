@@ -4,6 +4,9 @@ var shippingController = require('../controller/shippingController.js');
 var addressController = require('../controller/addressController.js');
 var orderController = require('../controller/orderController.js');
 var orderPhotoController = require('../controller/orderPhotoController.js');
+var creditCardController = require('../controller/creditCardController.js');
+var creditTransactionController = require('../controller/creditTransactionController.js');
+
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
@@ -26,4 +29,8 @@ module.exports = function (app) {
     app.get('/photo', orderPhotoController.findAll);
     app.get('/photo/images/order/:id', orderPhotoController.getImages);
     app.post('/photo', upload.single('photo'), orderPhotoController.uploadPhoto);
+    app.get('/creditCard/user/:id', creditCardController.getCreditCard)
+    app.get('/credit/user/:id', creditTransactionController.getCredit)
+    app.post('/address', addressController.create)
+    app.post('/creditCard', creditCardController.create)
 }

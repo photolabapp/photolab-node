@@ -5,6 +5,7 @@ module.exports = (sequelize, Sequelize) => {
         type: { type: Sequelize.STRING },
         recipient: { type: Sequelize.STRING },
         address: { type: Sequelize.STRING },
+        neighborhood: { type: Sequelize.STRING },
         number: { type: Sequelize.STRING },
         city: { type: Sequelize.STRING },
         state: { type: Sequelize.STRING },

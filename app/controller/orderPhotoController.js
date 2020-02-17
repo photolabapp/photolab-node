@@ -5,7 +5,7 @@ var fs = require("fs");
 
 exports.uploadPhoto = function (req, res) {
     var extension = req.file.mimetype.split("/")[1]
-    var path = "/home/ec2-user/Project/photolab-node/uploads/"
+    var path = "/Users/mauriciomerlin/Projects/PhotoLab/photolab-node/uploads/"
     var newFile = req.file.filename + "." + extension
     fs.renameSync(path + req.file.filename, path + newFile);
     model.create({
