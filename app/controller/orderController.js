@@ -5,7 +5,7 @@ const user = require("../model").user;
 const photoOrder = require("../model").photoOrder;
 var exports = module.exports = {};
 
-exports.create = function (req, res) {
+exports.create = (req, res) => {
     model.create({
         userId: req.body.user,
         status: "CREATED"
@@ -43,7 +43,8 @@ exports.getLastOrderCreated = function (req, res) {
         if (order) {
             res.json(order);
         } else {
-            res.status(412).send("Haven't order with status created");
+            //res.status(412).send("Haven't order with status created");
+            this.create(req, res)
         }
     }).error(err => res.json(err));
 }
