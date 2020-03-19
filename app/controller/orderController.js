@@ -6,8 +6,12 @@ const photoOrder = require("../model").photoOrder;
 var exports = module.exports = {};
 
 exports.create = (req, res) => {
+    createOrder(req.body.user, res)
+}
+
+const createOrder = (userId, res) => {
     model.create({
-        userId: req.body.user,
+        userId: userId,
         status: "CREATED"
     }).then(order => res.json(order));
 }
@@ -34,7 +38,7 @@ exports.uploadPhoto = function (req, res) {
 exports.getLastOrderCreated = function (req, res) {
     model.findOne({
         where: {
-            userId: req.body.user,
+            userId: req.params.id,
             status: "CREATED"
         },
         order: [["id", "DESC"]],
@@ -44,7 +48,7 @@ exports.getLastOrderCreated = function (req, res) {
             res.json(order);
         } else {
             //res.status(412).send("Haven't order with status created");
-            this.create(req, res)
+            createOrder(req.params.id, res)
         }
     }).error(err => res.json(err));
 }
