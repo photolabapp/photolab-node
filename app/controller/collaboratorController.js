@@ -12,6 +12,7 @@ exports.create = function (req, res) {
             model.create({
                 name: req.body.name,
                 email: req.body.email,
+                cellPhone: req.body.cellPhone,
                 password: req.body.password,
             }).then(collaborator => {
                 var concat = collaborator.email + ":" + collaborator.password
@@ -40,7 +41,8 @@ exports.login = function (req, res) {
     }).then(collaborator => {
         console.log('collaborator ' + collaborator);
         if (collaborator) {
-            var concat = collaborator.email + ":" + user.password
+            collaborator.password = ""
+            var concat = collaborator.email + ":" + collaborator.password
             let buff = new Buffer(concat);
             let base64data = buff.toString('base64');
 
