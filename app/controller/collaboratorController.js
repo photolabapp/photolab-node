@@ -39,7 +39,7 @@ exports.login = function (req, res) {
         }
     }).then(collaborator => {
         console.log('collaborator ' + collaborator);
-        if (user) {
+        if (collaborator) {
             var concat = collaborator.email + ":" + user.password
             let buff = new Buffer(concat);
             let base64data = buff.toString('base64');

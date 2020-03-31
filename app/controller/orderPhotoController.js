@@ -23,12 +23,12 @@ exports.uploadPhoto = function (req, res) {
 const updateOrderStatus = async (orderId, res) => {
     let orderPhoto = await model.findAll({ where: { orderId: orderId } })
     console.log("SLLSKDLDKLSKD --------- orderPhoto " + orderPhoto)
-    if (!orderPhoto) {
-        orderModel
-            .find({ where: { id: orderId } })
-            .then(order => { order.update({ status: "SAVED", dtUpdate: new Date() }) })
-            .error(err => res.json(err))
-    }
+    //if (!orderPhoto) {
+    orderModel
+        .find({ where: { id: orderId, status: "CREATED" } })
+        .then(order => { order.update({ status: "SAVED", dtUpdate: new Date() }) })
+        .error(err => res.json(err))
+    //}
 }
 
 exports.findAll = function (req, res) {
