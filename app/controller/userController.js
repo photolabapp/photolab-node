@@ -4,7 +4,7 @@ var exports = module.exports = {};
 exports.create = function (req, res) {
     model.findOne({
         where: {
-            email: req.body.email
+            email: { $eq: req.body.email }
         }
     }).then(user => {
         console.log('user ' + user);
@@ -50,14 +50,14 @@ exports.login = function (req, res) {
             res.status(403).send({ message: "Usuário ou senha inválidos" });
         }
     }).error(err => res.json(err));
-    
+
 }
 
 exports.findById = function (req, res) {
     console.log("DLKFDLFKDLF ==== userId " + req.params.id)
     model.find({
         where: {
-            id: req.params.id
+            id: { $eq: req.params.id }
         }
     }).then(user => {
         res.json({ user: user });

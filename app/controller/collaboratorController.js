@@ -1,30 +1,33 @@
 const model = require("../model").collaborator;
 var exports = module.exports = {};
 
-exports.create = function (req, res) {
-    model.findOne({
-        where: {
-            email: req.body.email
-        }
-    }).then(user => {
-        console.log('user ' + user);
-        if (!user) {
-            model.create({
+exports.create = async (req, res) => {
+    try {
+        let user = await model.findOne({ where: { id: { $eq: req.body.id } } })
+        console.log("usudsudus " + JSON.stringify(user))
+        if (user) {
+            user.update({
                 name: req.body.name,
                 email: req.body.email,
-                cellPhone: req.body.cellPhone,
-                password: req.body.password,
-            }).then(collaborator => {
-                var concat = collaborator.email + ":" + collaborator.password
-                let buff = Buffer.alloc(concat.length, concat);
-                let base64data = buff.toString('base64');
-                res.json({ collaborator: collaborator, accessToken: base64data })
-            })
+                password: (req.body.password) ? req.body.password : user.password,
+                dtUpdate: new Date()
+            }).then(order => res.json(order));
         } else {
-            res.status(412).send({ message: "E-mail " + req.body.email + " já existe!!!" });
+            let email = await model.findOne({ where: { email: { $eq: req.body.email } } })
+            if (email) {
+                res.status(412).send({ message: "E-mail " + req.body.email + " já existe!!!" })
+            } else {
+                model.create({
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password,
+                }).then(collaborator => res.json(collaborator))
+            }
         }
-    }).error(err => res.json(err));
-};
+    } catch (error) {
+        res.json(error)
+    }
+}
 
 exports.read = function (req, res) {
     model.findAll()
@@ -53,15 +56,12 @@ exports.login = function (req, res) {
     }).error(err => res.json(err));
 }
 
-/*
-exports.findById = function (req, res) {
-    console.log("DLKFDLFKDLF ==== userId " + req.params.id)
+exports.getById = function (req, res) {
     model.find({
         where: {
-            id: req.params.id
+            id: { $eq: req.params.id }
         }
-    }).then(user => {
-        res.json({ user: user });
+    }).then(collaborator => {
+        res.json(collaborator);
     }).error(err => res.json(err));
 }
-*/

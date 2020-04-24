@@ -78,14 +78,14 @@ getQtdPhotos = order => {
 exports.getById = function (req, res) {
     model.find({
         where: {
-            id: req.params.id
+            id: { $eq: req.params.id }
         }
     }).then(async order => {
-        var getOrderPhotos = await orderPhoto.findAll({ where: { orderId: order.id } })
+        var getOrderPhotos = await orderPhoto.findAll({ where: { orderId: { $eq: order.id } } })
         order.album = getOrderPhotos
-        var getUser = await user.findOne({ where: { id: order.userId } })
+        var getUser = await user.findOne({ where: { id: { $eq: order.userId } } })
         order.user = getUser
-        
+
         res.json(order)
     }).error(err => res.json(err));
 }

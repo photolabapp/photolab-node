@@ -21,7 +21,7 @@ exports.uploadPhoto = function (req, res) {
 }
 
 const updateOrderStatus = async (orderId, res) => {
-    let orderPhoto = await model.findAll({ where: { orderId: orderId } })
+    let orderPhoto = await model.findAll({ where: { orderId: { $eq: orderId } } })
     console.log("SLLSKDLDKLSKD --------- orderPhoto " + orderPhoto)
     //if (!orderPhoto) {
     orderModel
@@ -40,7 +40,7 @@ exports.findAll = function (req, res) {
 exports.getByOrderId = function (req, res) {
     model.findAll({
         where: {
-            orderId: req.params.id,
+            orderId: { $eq: req.params.id },
         }
     }).then(orderPhoto => {
         console.log('order ' + orderPhoto);
@@ -55,7 +55,7 @@ exports.getByOrderId = function (req, res) {
 exports.getImage = (req, res) => {
     model.find({
         where: {
-            id: req.params.id,
+            id: { $eq: req.params.id },
         }
     }).then(orderPhoto => {
         console.log('order ' + orderPhoto);
@@ -70,7 +70,7 @@ exports.getImage = (req, res) => {
 exports.getImages = (req, res) => {
     model.findAll({
         where: {
-            orderId: req.params.id,
+            orderId: { $eq: req.params.id },
         }
     }).then(orderPhotos => {
         if (orderPhotos) {
