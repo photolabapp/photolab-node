@@ -3,8 +3,8 @@ var exports = module.exports = {};
 
 exports.getShippingAddress = async (req, res) => {
     try {
-        const listUserAddress = await model.findAll({ where: { userId: req.params.id } })
-        const listDefaultAddress = await model.findAll({ where: { userId: null } })
+        const listUserAddress = await model.findAll({ where: { userId: { $eq: req.params.id } } })
+        const listDefaultAddress = await model.findAll({ where: { userId: { $eq: null } } })
 
         const address = []
         listDefaultAddress.forEach(defaultAddress => {
@@ -13,11 +13,21 @@ exports.getShippingAddress = async (req, res) => {
         listUserAddress.forEach(userAddress => {
             address.push(userAddress)
         })
-        
+
         res.json(address);
     } catch (error) {
         res.json(err)
     }
+}
+
+exports.findByUser = (req, res) => {
+    model.findAll({
+        where: {
+            userId: { $eq: req.params.id }
+        }
+    }).then(address => {
+        res.json(address);
+    }).error(err => res.json(err));
 }
 
 exports.create = function (req, res) {

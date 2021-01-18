@@ -26,6 +26,18 @@ exports.create = function (req, res) {
     }).error(err => res.json(err));
 };
 
+exports.update = function (req, res) {
+    model.findOne({ where: { id: { $eq: req.body.id } } }).then(user => {
+        console.log('user ' + user);
+        user.update({
+            name: req.body.name,
+            email: req.body.email,
+            password: (req.body.password) ? req.body.password : user.password,
+            dtUpdate: new Date()
+        }).then(order => res.json(order));
+    }).error(err => res.json(err));
+};
+
 exports.read = function (req, res) {
     model.findAll()
         .then(user => res.json(user))
@@ -50,7 +62,6 @@ exports.login = function (req, res) {
             res.status(403).send({ message: "Usuário ou senha inválidos" });
         }
     }).error(err => res.json(err));
-
 }
 
 exports.findById = function (req, res) {

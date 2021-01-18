@@ -13,6 +13,7 @@ var upload = multer({ dest: 'uploads/' })
 module.exports = function (app) {
     app.post('/user', userController.create);
     app.get('/user', userController.read);
+    app.put('/user', userController.update)
     app.get('/user/:id', userController.findById);
     app.post('/login', userController.login);
 
@@ -47,8 +48,9 @@ module.exports = function (app) {
 
     //Credit
     app.get('/credit/user/:id', creditTransactionController.getCredit)
+    app.get('/credit/transactions/user/:id', creditTransactionController.getCreditTransactionsById)
     
     //Address
     app.post('/address', addressController.create)
-    
+    app.get('/address/user/:id', addressController.findByUser)   
 }

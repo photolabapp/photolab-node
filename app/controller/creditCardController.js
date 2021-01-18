@@ -2,7 +2,7 @@ const model = require("../model").creditCard;
 var exports = module.exports = {};
 
 exports.getCreditCard = async (req, res) => {
-    model.findAll({ where: { userId: req.params.id } }).then(creditCards => {
+    model.findAll({ where: { userId: { $eq: req.params.id } } }).then(creditCards => {
         res.json(creditCards);
     }).catch(err => {
         res.json(err)
